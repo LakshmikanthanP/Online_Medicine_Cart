@@ -8,6 +8,7 @@ export default function ProductList(props)
     console.log()
     // pro = pro.toString().split(" ");
     return(
+        <>
         <Grid container spacing={4}>
                 {console.log("pro has "+pro)}    
         {pro.map(item=>(
@@ -16,7 +17,5 @@ export default function ProductList(props)
             </Grid>
         )
 
-    )}
-    </Grid>
     );
 }

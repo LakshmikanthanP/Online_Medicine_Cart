@@ -1,6 +1,10 @@
 const express = require('express');
+const req = require('express/lib/request');
 const router = express.Router();
-const Product = require("../../models/product");
+const Product = require("../../models/productModel");
+const APIFeatures = require('../../utils/apiFeatures');
+
+
 
       router.route('/').get((req,res)=>{
         console.log("Called from here");
@@ -10,7 +14,7 @@ const Product = require("../../models/product");
             });
 
       router.route('/:id').get((req,res)=>{
-        Product.find({_id:req.params.id}) 
+        Product.findById({_id:req.params.id}) 
         .then(Product => res.json(Product))
         .catch(err => res.status(400).json('Error: ' + err));
           });

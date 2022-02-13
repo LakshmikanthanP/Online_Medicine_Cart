@@ -20,15 +20,39 @@ function Products(props)
         .then(resp=>resp.json())
         .then(data=>setProducts(data))
     },[word])   
+import {  useDispatch,useSelector } from "react-redux";
+import productSelectors from "./Catalog/CatalogSlice"
+import { listProducts } from "../actions/productActions";
+import Message from "./Message";
+import Loader from "./Loader";
+
+function Products(props)
+{
+    const dispatch = useDispatch()
+
+    const productList = useSelector((state) => state.productList)
+    const { loading,error,products } = productList
+
+    useEffect(()=>
+    {
+        // console.log(props)
+        // fetch(`http://localhost:5000/product`)
+        // .then(resp=>resp.json())
+        // .then(data=>setProducts(data))
+        dispatch(listProducts())
+    },[dispatch])   
 return(
     <>
         <Button component={Link} to={`./adminHome`} size="small">AdminView</Button>
         <Button component={Link} to={`./sellerHome`} size="small">SellerView</Button>
         <CssBaseline></CssBaseline>
-        <Header></Header>
-        <Container >
-            <Catalog products={products}></Catalog>
-        </Container>
+        <h1>Latest Products</h1> 
+        {loading? <Loader/>: error? <Message>{error}</Message>:
+                <Container >
+                <Catalog products={products}></Catalog>
+            </Container>    
+        }
+
     </>
 );
 
