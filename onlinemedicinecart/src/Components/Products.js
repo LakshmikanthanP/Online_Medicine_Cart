@@ -11,6 +11,9 @@ import Loader from "./Loader";
 
 function Products(props)
 {
+    const word = props.keyword;
+    const [products,setProducts] = useState([]);
+
     const dispatch = useDispatch()
 
     const productList = useSelector((state) => state.productList)
@@ -23,9 +26,11 @@ function Products(props)
         // .then(resp=>resp.json())
         // .then(data=>setProducts(data))
         dispatch(listProducts())
-    },[dispatch])   
+    },[dispatch,word])   
 return(
     <>
+        <Button component={Link} to={`./adminHome`} size="small">AdminView</Button>
+        <Button component={Link} to={`./sellerHome`} size="small">SellerView</Button>
         <CssBaseline></CssBaseline>
         <h1>Latest Products</h1> 
         {loading? <Loader/>: error? <Message>{error}</Message>:

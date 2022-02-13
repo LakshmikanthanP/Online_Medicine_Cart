@@ -8,13 +8,13 @@ export default function ProductList(props)
 {
     const productList = useSelector((state) => state.productList)
     const { loading,error,products } = productList
-
+    let pro = props.products;
     return(
         <>
         {loading? <h1>Loading..</h1>: error? <h2>{error}</h2>:(
         <Grid container spacing={4}>
         {console.log(props.products)}    
-        {props.products.map(item=>(
+        {pro.map(item=>(
          <Grid item xs={4}>
                 { 
                     <ProductCard key = {item._id} product={item} />                
